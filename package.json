@@ -1,0 +1,24 @@
+{
+  "name": "vite-plugin-zip",
+  "version": "1.0.0",
+  "description": "gzip files at build time.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "script/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Ssis53/vite-plugin-zip.git"
+  },
+  "keywords": [
+    "vite",
+    "zip",
+    "compress"
+  ],
+  "author": "Shawn Wu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ssis53/vite-plugin-zip/issues"
+  },
+  "homepage": "https://github.com/Ssis53/vite-plugin-zip#readme"
+}
