@@ -15,7 +15,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/utils/vite-plugin-zip-flie.js'),
       name: 'index',
-      fileName: (format) => `index.${format}.js`,
+      fileName: (format) => format === 'cjs'? 'index.cjs': 'index.mjs',
       formats: ['cjs', 'es']
     },
     rollupOptions: {

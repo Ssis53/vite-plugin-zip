@@ -25,8 +25,8 @@ npm install vite-plugin-zip-file --save-dev
 
 # Usage
 ```javascript
-import { defineConfig } from 'vite'
-import { vitePluginZip } from 'vite-plugin-zip'
+import { defineConfig } from 'vite';
+import { viteZip } from 'vite-plugin-zip-file';
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -34,7 +34,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vitePluginZip({
+    viteZip({
       folderPath: path.resolve(__dirname, 'dist'),
       outPath: path.resolve(__dirname),
       zipName: 'Test.zip'
