@@ -24,7 +24,7 @@ npm install vite-plugin-zip-file --save-dev
 
 
 # Usage
-```
+```javascript
 import { defineConfig } from 'vite'
 import { vitePluginZip } from 'vite-plugin-zip'
 import path from 'path';
