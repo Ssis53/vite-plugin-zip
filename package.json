@@ -1,9 +1,10 @@
 {
-  "name": "vite-plugin-zip",
+  "name": "vite-plugin-zip-file",
   "version": "1.0.0",
-  "description": "gzip files at build time.",
+  "description": "zip files at build time.",
   "type": "module",
-  "main": "lib/index.es.js",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

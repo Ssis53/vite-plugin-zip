@@ -2,14 +2,14 @@
  * @Author: xiangfu.wu
  * @Date: 2022-08-18 15:30:35
  * @Description: 🚀
- * @FilePath: /vite-plugin-zip/src/utils/vite-plugin-zip.js
+ * @FilePath: /vite-plugin-zip-file/src/utils/vite-plugin-zip-flie.js
  */
 import path from 'path';
 import fs from 'fs';
 import { createRequire } from 'node:module'
 const requireds = createRequire(import.meta.url);
 
-export const vitePluginZip = (config = { folderPath: null, outPath: null, zipName: null }) => {
+export const viteZip = (config = { folderPath: null, outPath: null, zipName: null }) => {
   let { folderPath, outPath, zipName } = config;
   if (!folderPath || !outPath) {
     throw new Error('config.folderPath and config.outPath is required.');

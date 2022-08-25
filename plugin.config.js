@@ -2,7 +2,7 @@
  * @Author: xiangfu.wu
  * @Date: 2022-08-18 16:59:00
  * @Description: 🚀
- * @FilePath: /vite-plugin-zip/plugin.config.js
+ * @FilePath: /vite-plugin-zip-file/plugin.config.js
  */
 
 import { defineConfig } from 'vite'
@@ -13,7 +13,7 @@ export default defineConfig({
   publicDir: false,
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/utils/vite-plugin-zip.js'),
+      entry: path.resolve(__dirname, 'src/utils/vite-plugin-zip-flie.js'),
       name: 'index',
       fileName: (format) => `index.${format}.js`,
       formats: ['cjs', 'es']
