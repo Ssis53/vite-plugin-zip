@@ -66,7 +66,7 @@ export const viteZip = (config = { folderPath: null, outPath: null, zipName: nul
     doZip()
   };
   return {
-    name: 'vite-plugin-zip',
+    name: 'vite-plugin-zip-file',
     apply: 'build',
     closeBundle() {
       makeZip();
