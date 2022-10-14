@@ -8,6 +8,7 @@ import path from 'path';
 import fs from 'fs';
 import { createRequire } from 'node:module'
 const requireds = createRequire(import.meta.url);
+const pathSep = path.sep;
 
 export const viteZip = (config = { folderPath: null, outPath: null, zipName: null }) => {
   let { folderPath, outPath, zipName } = config;
@@ -16,7 +17,7 @@ export const viteZip = (config = { folderPath: null, outPath: null, zipName: nul
   }
   folderPath = path.resolve(folderPath);
   outPath = path.resolve(outPath);
-  zipName = zipName? zipName: folderPath.split('/').pop() + '.zip';
+  zipName = zipName? zipName: folderPath.split(pathSep).pop() + '.zip';
   const makeZip = () => {
     const JSZip = requireds('jszip');
     const zip = new JSZip();
@@ -25,9 +26,9 @@ export const viteZip = (config = { folderPath: null, outPath: null, zipName: nul
     const readDir = function (zip, dirPath, fileDir = '') {
       // 读取组件下的根文件目录
       const files = fs.readdirSync(dirPath);
-      fileDir += dirPath.split('/').pop() + '/';
+      fileDir += dirPath.split(pathSep).pop() + pathSep;
       files.forEach(fileName => {
-        const fillPath = path.join(dirPath, "/", fileName)
+        const fillPath = path.join(dirPath, pathSep, fileName)
         const file = fs.statSync(fillPath);
         // 如果是文件夹的话需要递归遍历下面的子文件
         if (file.isDirectory()) {
@@ -41,7 +42,7 @@ export const viteZip = (config = { folderPath: null, outPath: null, zipName: nul
     }
     
     const removeZip = (name = zipName) => {
-      const dest = path.join(outPath, '/' + name)
+      const dest = path.join(outPath, pathSep + name)
       if (fs.existsSync(dest)) {
         fs.unlinkSync(dest)
       }
@@ -58,7 +59,7 @@ export const viteZip = (config = { folderPath: null, outPath: null, zipName: nul
         }
       }).then(content => {
         removeZip(zipName)
-        fs.writeFileSync(path.join(outPath,'/' ,zipName), content);
+        fs.writeFileSync(path.join(outPath,pathSep ,zipName), content);
       });
     }
 
