@@ -9,13 +9,13 @@
 import { defineConfig } from 'vite'
 import path from 'path';
 import { fileURLToPath } from 'url';
-// import { vitePluginZip } from './src/utils/vite-plugin-zip-file.js';
-import { vitePluginZip } from './lib/index.es.js';
+// import { viteZip } from './src/utils/vite-plugin-zip-flie';
+import { viteZip } from './lib/index.mjs';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   publicDir: false,
   plugins: [
-    vitePluginZip({
+    viteZip({
       folderPath: path.resolve(__dirname, 'dist'),
       outPath: path.resolve(__dirname)
     })
