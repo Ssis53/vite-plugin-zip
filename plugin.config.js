@@ -13,7 +13,7 @@ export default defineConfig({
   publicDir: false,
   build: {
     lib: {
-      entry: path.resolve(__dirname, 'src/utils/vite-plugin-zip-flie.js'),
+      entry: path.resolve(__dirname, 'src/utils/vite-plugin-zip-flie.ts'),
       name: 'index',
       fileName: (format) => format === 'cjs'? 'index.cjs': 'index.mjs',
       formats: ['cjs', 'es']

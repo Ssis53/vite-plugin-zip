@@ -2,7 +2,7 @@
  * @Author: xiangfu.wu
  * @Date: 2022-08-18 15:30:35
  * @Description: 🚀
- * @FilePath: /vite-plugin-zip-file/src/utils/vite-plugin-zip-flie.js
+ * @FilePath: /vite-plugin-zip-file/src/utils/vite-plugin-zip-flie.ts
  */
 import path from 'path';
 import fs from 'fs';
@@ -10,8 +10,29 @@ import { createRequire } from 'node:module'
 const requireds = createRequire(import.meta.url);
 const pathSep = path.sep;
 
-export const viteZip = (config = { folderPath: null, outPath: null, zipName: null }) => {
-  let { folderPath, outPath, zipName } = config;
+interface PluginConfig {
+  enabled: boolean,
+  folderPath: string,
+  outPath: string,
+  zipName: string
+}
+
+const defaultConfig: PluginConfig = {
+  enabled: true,
+  folderPath: '',
+  outPath: '',
+  zipName: ''
+}
+
+
+
+export const viteZip = (customConfig: PluginConfig) => {
+  let config: PluginConfig = {
+    ...defaultConfig,
+    ...customConfig
+  }
+  let { enabled, folderPath, outPath, zipName }: PluginConfig = config;
+  enabled = Boolean(enabled);
   if (!folderPath || !outPath) {
     throw new Error('config.folderPath and config.outPath is required.');
   }
@@ -70,6 +91,9 @@ export const viteZip = (config = { folderPath: null, outPath: null, zipName: nul
     name: 'vite-plugin-zip-file',
     apply: 'build',
     closeBundle() {
+      if(!enabled) {
+        return;
+      }
       makeZip();
     }
   }

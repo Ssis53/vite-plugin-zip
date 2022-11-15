@@ -4,6 +4,12 @@
   "description": "zip files at build time.",
   "type": "module",
   "main": "lib/index.cjs",
+  "files": [
+    "lib/*",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ],
   "module": "lib/index.mjs",
   "scripts": {
     "dev": "vite",
