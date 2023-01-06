@@ -1,5 +1,6 @@
 # vite-plugin-zip-file
 [![MIT LICENSE](https://img.shields.io/badge/LICENSE-MIT-green)](./LICENSE)
+ ![size](https://img.shields.io/bundlephobia/min/vite-plugin-zip-file)
 [![downloads](https://img.shields.io/npm/dw/vite-plugin-zip-file)](https://www.npmjs.com/package/vite-plugin-zip-file)
 
 Zip files at build time.
