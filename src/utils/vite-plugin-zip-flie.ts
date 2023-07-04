@@ -9,7 +9,7 @@ import fs from 'fs';
 import { createRequire } from 'node:module'
 const requireds = createRequire(import.meta.url);
 const pathSep = path.sep;
-
+const { cwd } = process;
 interface PluginConfig {
   enabled: boolean,
   folderPath: string,
@@ -19,8 +19,8 @@ interface PluginConfig {
 
 const defaultConfig: PluginConfig = {
   enabled: true,
-  folderPath: '',
-  outPath: '',
+  folderPath: path.join(cwd(), '/dist'),
+  outPath: path.resolve(cwd()),
   zipName: ''
 }
 

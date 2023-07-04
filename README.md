@@ -22,10 +22,12 @@ npm install vite-plugin-zip-file --save-dev
 
 | Param      | Types        | Rquired | Default | Desc                                                         |
 | :--------- | ------------ | ------- | ------- | ------------------------------------------------------------ |
-| folderPath | String\|Path | true    | -       | Path to the compressed folder                                |
-| outPath    | String\|Path | true    | -       | Compressed package output path                               |
+| folderPath | String\|Path | true    | /dist   | Path to the compressed folder                                |
+| outPath    | String\|Path | true    | /       | Compressed package output path                               |
 | zipName    | String       | false   | dist    | Package name                                                 |
-| enabled  | Boolean      | false   | true    | This parameter is used to control whether the plugin is enabled. It is usually used to determine whether to compress files according to the environment |
+| enabled    | Boolean      | false   | true    | This parameter is used to control whether the plugin is enabled. It is usually used to determine whether to compress files according to the environment |
+
+
 
 
 
