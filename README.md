@@ -17,7 +17,7 @@ or
 npm install vite-plugin-zip-file --save-dev
 ```
 
-# Optons
+# Options
 
 
 | Param      | Types        | Rquired | Default | Desc                                                         |
