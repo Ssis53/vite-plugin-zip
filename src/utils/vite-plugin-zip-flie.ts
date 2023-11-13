@@ -11,17 +11,19 @@ const requireds = createRequire(import.meta.url);
 const pathSep = path.sep;
 const { cwd } = process;
 interface PluginConfig {
-  enabled: boolean,
+  enabled?: boolean,
   folderPath: string,
   outPath: string,
-  zipName: string
+  zipName: string,
+  deleteFolder?: boolean
 }
 
 const defaultConfig: PluginConfig = {
   enabled: true,
   folderPath: path.join(cwd(), '/dist'),
   outPath: path.resolve(cwd()),
-  zipName: ''
+  zipName: '',
+  deleteFolder: false
 }
 
 
@@ -31,7 +33,7 @@ export const viteZip = (customConfig: PluginConfig) => {
     ...defaultConfig,
     ...customConfig
   }
-  let { enabled, folderPath, outPath, zipName }: PluginConfig = config;
+  let { enabled, folderPath, outPath, zipName, deleteFolder }: PluginConfig = config;
   enabled = Boolean(enabled);
   if (!folderPath || !outPath) {
     throw new Error('config.folderPath and config.outPath is required.');
@@ -69,6 +71,21 @@ export const viteZip = (customConfig: PluginConfig) => {
       }
     }
 
+    const removeFolder = (path: string) => {
+      const files = fs.readdirSync(path);
+      files.forEach((file) => {
+        const curPath = path + pathSep + file;
+        if (fs.statSync(curPath).isDirectory()) {
+          // recurse
+          removeFolder(curPath);
+        } else {
+          // delete file
+          fs.unlinkSync(curPath);
+        }
+      });
+      fs.rmdirSync(path);
+    }
+
     const doZip = function () {
 
       readDir(zip, folderPath);
@@ -80,7 +97,11 @@ export const viteZip = (customConfig: PluginConfig) => {
         }
       }).then(content => {
         removeZip(zipName)
-        fs.writeFileSync(path.join(outPath,pathSep ,zipName), content);
+        fs.writeFileSync(path.join(outPath, pathSep, zipName), content);
+        // 删除文件夹
+        if (deleteFolder) {
+          removeFolder(folderPath);
+        }
       });
     }
 
