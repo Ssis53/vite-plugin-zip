@@ -10,30 +10,31 @@ import { createRequire } from 'node:module'
 const requireds = createRequire(import.meta.url);
 const pathSep = path.sep;
 const { cwd } = process;
+
 interface PluginConfig {
-  enabled?: boolean,
-  folderPath: string,
-  outPath: string,
-  zipName: string,
-  deleteFolder?: boolean
+	enabled?: boolean,
+	folderPath: string,
+	outPath: string,
+	zipName: string,
+	deleteFolder?: boolean,
+	internalDir?: boolean
 }
 
 const defaultConfig: PluginConfig = {
-  enabled: true,
-  folderPath: path.join(cwd(), '/dist'),
-  outPath: path.resolve(cwd()),
-  zipName: '',
-  deleteFolder: false
+	enabled: true,
+	folderPath: path.join(cwd(), '/dist'),
+	outPath: path.resolve(cwd()),
+	zipName: '',
+	deleteFolder: false,
+	internalDir: true
 }
 
-
-
 export const viteZip = (customConfig: PluginConfig) => {
-  let config: PluginConfig = {
-    ...defaultConfig,
-    ...customConfig
-  }
-  let { enabled, folderPath, outPath, zipName, deleteFolder }: PluginConfig = config;
+	let config: PluginConfig = {
+			...defaultConfig,
+			...customConfig
+	}
+	let { enabled, folderPath, outPath, zipName, deleteFolder, internalDir }: PluginConfig = config;
   enabled = Boolean(enabled);
   if (!folderPath || !outPath) {
     throw new Error('config.folderPath and config.outPath is required.');
@@ -42,28 +43,29 @@ export const viteZip = (customConfig: PluginConfig) => {
   outPath = path.resolve(outPath);
   zipName = zipName? zipName: folderPath.split(pathSep).pop() + '.zip';
   const makeZip = () => {
-    const JSZip = requireds('jszip');
-    const zip = new JSZip();
-    
+			const JSZip = requireds('jszip');
+			const zip = new JSZip();
 
-    const readDir = function (zip, dirPath, fileDir = '') {
-      // 读取组件下的根文件目录
-      const files = fs.readdirSync(dirPath);
-      fileDir += dirPath.split(pathSep).pop() + pathSep;
-      files.forEach(fileName => {
-        const fillPath = path.join(dirPath, pathSep, fileName)
-        const file = fs.statSync(fillPath);
-        // 如果是文件夹的话需要递归遍历下面的子文件
-        if (file.isDirectory()) {
-          // const dirZip = zip.folder(fileName);
-          readDir(zip, fillPath, fileDir);
-        } else {
-          // 读取每个文件为buffer存到zip中，带上文件夹，保证压缩后文件目录不变
-          zip.file(fileDir + fileName, fs.readFileSync(fillPath))
-        }
-      });
-    }
-    
+			const readDir = function (zip, dirPath, fileDir = '') {
+					const files = fs.readdirSync(dirPath);
+
+					// Update this condition
+					if (internalDir) {
+							fileDir += dirPath.split(pathSep).pop() + pathSep;
+					}
+
+					files.forEach(fileName => {
+							const fillPath = path.join(dirPath, pathSep, fileName)
+							const file = fs.statSync(fillPath);
+							if (file.isDirectory()) {
+									readDir(zip, fillPath, fileDir);
+							} else {
+									// Update this line
+									zip.file(fileDir + fileName, fs.readFileSync(fillPath))
+							}
+					});
+			}
+
     const removeZip = (name = zipName) => {
       const dest = path.join(outPath, pathSep + name)
       if (fs.existsSync(dest)) {
