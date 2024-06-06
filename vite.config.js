@@ -20,7 +20,7 @@ export default defineConfig({
     viteZip({
       folderPath: path.resolve(__dirname, 'dist'),
       outPath: path.resolve(__dirname),
-      enabled: env.NODE_ENV === 'production'? true: false
+      enabled: env.NODE_ENV === 'production' ? true : false,
     })
   ],
   server: {
