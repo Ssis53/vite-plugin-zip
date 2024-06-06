@@ -15,7 +15,8 @@ interface PluginConfig {
   folderPath: string,
   outPath: string,
   zipName: string,
-  deleteFolder?: boolean
+  deleteFolder?: boolean,
+  withoutMainFolder?: boolean,
 }
 
 const defaultConfig: PluginConfig = {
@@ -23,7 +24,8 @@ const defaultConfig: PluginConfig = {
   folderPath: path.join(cwd(), '/dist'),
   outPath: path.resolve(cwd()),
   zipName: '',
-  deleteFolder: false
+  deleteFolder: false,
+  withoutMainFolder: false,
 }
 
 
@@ -33,7 +35,7 @@ export const viteZip = (customConfig: PluginConfig) => {
     ...defaultConfig,
     ...customConfig
   }
-  let { enabled, folderPath, outPath, zipName, deleteFolder }: PluginConfig = config;
+  let { enabled, folderPath, outPath, zipName, deleteFolder, withoutMainFolder }: PluginConfig = config;
   enabled = Boolean(enabled);
   if (!folderPath || !outPath) {
     throw new Error('config.folderPath and config.outPath is required.');
@@ -46,23 +48,28 @@ export const viteZip = (customConfig: PluginConfig) => {
     const zip = new JSZip();
     
 
-    const readDir = function (zip, dirPath, fileDir = '') {
+    const readDir = function (zip, dirPath, fileDir = '', depth = 0) {
       // 读取组件下的根文件目录
       const files = fs.readdirSync(dirPath);
-      fileDir += dirPath.split(pathSep).pop() + pathSep;
+      if (withoutMainFolder) {
+        if (depth !== 0) {
+          fileDir += dirPath.split(pathSep).pop() + pathSep;
+        }
+      } else {
+        fileDir += dirPath.split(pathSep).pop() + pathSep;
+      }
       files.forEach(fileName => {
         const fillPath = path.join(dirPath, pathSep, fileName)
         const file = fs.statSync(fillPath);
         // 如果是文件夹的话需要递归遍历下面的子文件
         if (file.isDirectory()) {
-          // const dirZip = zip.folder(fileName);
-          readDir(zip, fillPath, fileDir);
+          readDir(zip, fillPath, fileDir, depth + 1);
         } else {
           // 读取每个文件为buffer存到zip中，带上文件夹，保证压缩后文件目录不变
           zip.file(fileDir + fileName, fs.readFileSync(fillPath))
         }
       });
-    }
+    };
     
     const removeZip = (name = zipName) => {
       const dest = path.join(outPath, pathSep + name)
@@ -88,7 +95,7 @@ export const viteZip = (customConfig: PluginConfig) => {
 
     const doZip = function () {
 
-      readDir(zip, folderPath);
+      readDir(zip, folderPath, '', 0);
       zip.generateAsync({
         type: "nodebuffer", // 压缩类型
         compression: "DEFLATE", // 压缩算法
