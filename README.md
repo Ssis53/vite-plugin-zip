@@ -32,6 +32,7 @@ npm install vite-plugin-zip-file --save-dev
 | deleteFolder      | Boolean      | false   | false   | Whether to delete source files after compression is completed |
 | withoutMainFolder | Boolean      | false   | false   | The compressed file whether removes the outermost main folder. |
 
+<br />
 
 # Options(中文)
 
@@ -40,8 +41,8 @@ npm install vite-plugin-zip-file --save-dev
     <tr>
       <th>参数</th>
       <th>类型</th>
-      <th width="60">必填</th>
-      <th width="80">默认值</th>
+      <th width="75">必填</th>
+      <th width="95">默认值</th>
       <th>说明</th>
     </tr>
   </thead>
@@ -89,15 +90,9 @@ npm install vite-plugin-zip-file --save-dev
       <td>压缩后的文件是否去掉最外层文件夹</td>
     </tr>
   </tbody>
-</table>    |
+</table>
 
-
-
-
-
-
-
-
+<br />
 
 # Usage
 
