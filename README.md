@@ -35,15 +35,61 @@ npm install vite-plugin-zip-file --save-dev
 
 # Options(中文)
 
-
-| 参数              | 类型         | 必填 | 默认值 | 说明                                                    |
-| :---------------- | ------------ | ---- | ------ | ------------------------------------------------------- |
-| folderPath        | String\|Path | 是   | /dist  | 需要被压缩的源文件夹                                    |
-| outPath           | String\|Path | 是   | /      | 压缩包输出路径                                          |
-| zipName           | String       | 否   | dist   | 压缩包名称                                              |
-| enabled           | Boolean      | 否   | true   | 用于控制插件是否启用， 通常用于根据环境判断是否压缩文件 |
-| deleteFolder      | Boolean      | 否   | false  | 压缩完成后是否删除源文件                                |
-| withoutMainFolder | Boolean      | 否   | false  | 压缩后的文件是否去掉最外层文件夹                        |
+<table>
+  <thead>
+    <tr>
+      <th>参数</th>
+      <th>类型</th>
+      <th width="60">必填</th>
+      <th width="80">默认值</th>
+      <th>说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>folderPath</td>
+      <td>String|Path</td>
+      <td>是</td>
+      <td>/dist</td>
+      <td>需要被压缩的源文件夹</td>
+    </tr>
+    <tr>
+      <td>outPath</td>
+      <td>String|Path</td>
+      <td>是</td>
+      <td>/</td>
+      <td>压缩包输出路径</td>
+    </tr>
+    <tr>
+      <td>zipName</td>
+      <td>String</td>
+      <td>否</td>
+      <td>dist</td>
+      <td>压缩包名称</td>
+    </tr>
+    <tr>
+      <td>enabled</td>
+      <td>Boolean</td>
+      <td>否</td>
+      <td>true</td>
+      <td>用于控制插件是否启用， 通常用于根据环境判断是否压缩文件</td>
+    </tr>
+    <tr>
+      <td>deleteFolder</td>
+      <td>Boolean</td>
+      <td>否</td>
+      <td>false</td>
+      <td>压缩完成后是否删除源文件</td>
+    </tr>
+    <tr>
+      <td>withoutMainFolder</td>
+      <td>Boolean</td>
+      <td>否</td>
+      <td>false</td>
+      <td>压缩后的文件是否去掉最外层文件夹</td>
+    </tr>
+  </tbody>
+</table>    |
 
 
 
