@@ -110,7 +110,7 @@ export default defineConfig({
     viteZip({
       folderPath: path.resolve(__dirname, 'dist'),
       outPath: path.resolve(__dirname),
-      zipName: 'Test.zip',
+      zipName: 'dist.zip',
       enabled: env.NODE_ENV === 'production'? true: false
     })
   ]

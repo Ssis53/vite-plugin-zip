@@ -2,17 +2,18 @@
  * @Author: xiangfu.wu
  * @Date: 2022-08-18 16:31:25
  * @Description: 🚀
- * @FilePath: /vite-plugin-zip-file/vite.config.js
+ * @FilePath: /vite-plugin-zip-file/vite.config.ts
  */
-
 
 import { defineConfig } from 'vite'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { env } from 'node:process'
-// import { viteZip } from './src/utils/vite-plugin-zip-flie';
-import { viteZip } from './lib/index.mjs';
+import { viteZip } from './src/utils/index';
+// import { viteZip } from './lib/index.mjs';
 // import { viteZip } from 'vite-plugin-zip-file';
+
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
   publicDir: false,
@@ -24,7 +25,7 @@ export default defineConfig({
     })
   ],
   server: {
-    port: '4321'
+    port: 4321
   }
 })
 

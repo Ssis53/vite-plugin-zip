@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-zip-file",
   "version": "4.0.0",
-  "description": "zip files at build time.",
+  "description": "Zip files at build time.",
   "type": "module",
   "main": "lib/index.cjs",
   "files": [
@@ -11,11 +11,20 @@
     "README.md"
   ],
   "module": "lib/index.mjs",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.cjs"
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "build-d": "node --inspect-brk=9229 ./node_modules/vite/dist/node/cli.js build",
-    "build-plugin": "vite --config plugin.config.js build"
+    "build-plugin": "vite --config plugin.config.ts build && tsc"
   },
   "repository": {
     "type": "git",
@@ -33,11 +42,13 @@
   },
   "homepage": "https://github.com/Ssis53/vite-plugin-zip#readme",
   "dependencies": {
-    "jszip": "^3.10.1"
+    "jszip": "3.10.1"
   },
   "devDependencies": {
-    "vite": "^6.2.0",
-    "@rollup/plugin-node-resolve": "^15.2.0"
+    "@rollup/plugin-node-resolve": "^15.2.0",
+    "@types/node": "^22.13.15",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0"
   },
   "peerDependencies": {
     "vite": ">=2.0.0"
