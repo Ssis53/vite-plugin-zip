@@ -20,6 +20,12 @@ or
 npm install vite-plugin-zip-file --save-dev
 ```
 
+or
+
+```
+pnpm add vite-plugin-zip-file -D
+```
+
 # Options
 
 
@@ -34,7 +40,7 @@ npm install vite-plugin-zip-file --save-dev
 
 <br />
 
-# Options(中文)
+# 选项
 
 <table>
   <thead>
