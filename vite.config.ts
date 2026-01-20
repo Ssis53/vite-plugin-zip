@@ -10,7 +10,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { env } from 'node:process'
 import { viteZip } from './src/utils/index';
-// import { viteZip } from './lib/index.mjs';
 // import { viteZip } from 'vite-plugin-zip-file';
 
 

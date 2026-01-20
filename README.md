@@ -6,7 +6,7 @@
 
 Zip files at build time.
 
-**Tips: Node.js 16+ is required.**
+**Tips: Node.js 20+ is required.**
 
 # Install
 

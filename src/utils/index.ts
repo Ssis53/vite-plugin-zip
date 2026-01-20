@@ -126,7 +126,7 @@ export const viteZip = (customConfig: ViteZipConfig): PluginOption => {
   return {
     name: 'vite-plugin-zip-file',
     apply: 'build',
-    enforce: 'post',
+    enforce: 'post' as const,
     configResolved(config) {
       logger = config.logger;
     },
@@ -145,5 +145,5 @@ export const viteZip = (customConfig: ViteZipConfig): PluginOption => {
       }
     }
 
-  }
+  } as PluginOption;
 }
