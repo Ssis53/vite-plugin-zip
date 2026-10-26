@@ -6,11 +6,8 @@
  */
 import path from 'path';
 import fs from 'fs';
-import { createRequire } from 'node:module'
-import { Logger, PluginOption } from 'vite';
+import { type Logger, type PluginOption, type ResolvedConfig } from 'vite';
 
-
-const requireds = createRequire(import.meta.url);
 const pathSep = path.sep;
 const { cwd } = process;
 interface ViteZipConfig {
@@ -46,8 +43,9 @@ export const viteZip = (customConfig: ViteZipConfig): PluginOption => {
   folderPath = path.resolve(folderPath);
   outPath = path.resolve(outPath);
   zipName = zipName ? zipName : folderPath.split(pathSep).pop() + '.zip';
-  const makeZip = () => {
-    const JSZip = requireds('jszip');
+  const makeZip = async () => {
+    const JSZipModule = await import('jszip');
+    const JSZip = (JSZipModule as any).default ?? JSZipModule;
     const zip = new JSZip();
 
     const readDir = function (zip: any, dirPath: string, fileDir = '', depth = 0) {
@@ -127,7 +125,7 @@ export const viteZip = (customConfig: ViteZipConfig): PluginOption => {
     name: 'vite-plugin-zip-file',
     apply: 'build',
     enforce: 'post' as const,
-    configResolved(config) {
+    configResolved(config: ResolvedConfig) {
       logger = config.logger;
     },
     async closeBundle() {

@@ -1,4 +1,4 @@
-import { PluginOption } from 'vite';
+import { type PluginOption } from 'vite';
 interface ViteZipConfig {
     enabled?: boolean;
     folderPath: string;

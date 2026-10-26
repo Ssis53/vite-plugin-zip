@@ -8,7 +8,7 @@
 import { defineConfig } from 'vite'
 import path from 'path';
 import { fileURLToPath } from 'url';
-import pkg from './package.json';
+import pkg from './package.json' with { type: 'json' };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export default defineConfig({
