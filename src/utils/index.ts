@@ -9,6 +9,8 @@ import fs from 'fs';
 import { type Logger, type PluginOption, type ResolvedConfig } from 'vite';
 
 const pathSep = path.sep;
+// ZIP 条目路径必须固定使用正斜杠，不能跟随操作系统的路径分隔符
+const zipPathSep = '/';
 const { cwd } = process;
 interface ViteZipConfig {
   enabled?: boolean,
@@ -53,10 +55,10 @@ export const viteZip = (customConfig: ViteZipConfig): PluginOption => {
       const files = fs.readdirSync(dirPath);
       if (withoutMainFolder) {
         if (depth !== 0) {
-          fileDir += dirPath.split(pathSep).pop() + pathSep;
+          fileDir += path.basename(dirPath) + zipPathSep;
         }
       } else {
-        fileDir += dirPath.split(pathSep).pop() + pathSep;
+        fileDir += path.basename(dirPath) + zipPathSep;
       }
       files.forEach(fileName => {
         const fillPath = path.join(dirPath, pathSep, fileName)
